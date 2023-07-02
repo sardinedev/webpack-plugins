@@ -1,5 +1,5 @@
 ---
-"webpack-plugin-typed-css": major
+"@sardine/webpack-plugin-typed-css": major
 ---
 
-feat: Add webpack-plugin-typed-css
+feat: Add @sardine/webpack-plugin-typed-css
