@@ -1,6 +1,5 @@
 {
-  "name": "webpack-plugings",
-  "version": "1.0.0",
+  "name": "webpack-plugins",
   "description": "",
   "main": "index.js",
   "scripts": {
