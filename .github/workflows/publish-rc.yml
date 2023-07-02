@@ -1,4 +1,4 @@
-name: Webpack Plugin RC
+name: Webpack Plugins RC
 
 on:
   pull_request:
@@ -6,13 +6,16 @@ on:
       - opened
       - synchronize
     paths:
-      - src/**
+      - packages/**
       - .github/workflows/**
 
 jobs:
   publish-rc:
     name: Publish RC
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        packages: ["typed-css"]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,10 +42,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build package
-        run: npm run build
+      - name: Release package
+        run: npm run release
 
-      - name: Publish Colour Release Candidate
+      - name: Publish Webpack Plugins Release Candidate
+        working-directory: packages/${{matrix.packages}}
         run: |
           npm version prerelease --preid rc.${{ github.event.number }}.${{ github.run_id }}  --git-tag-version=false
           npm publish --tag rc
