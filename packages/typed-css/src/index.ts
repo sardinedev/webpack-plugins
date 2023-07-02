@@ -1,10 +1,15 @@
 import { writeFileSync } from "node:fs";
+import { getOptions } from "loader-utils";
 import { buildTsExports, buildbanner, getCssModuleKeys } from "./utils";
+import type { LoaderContext } from "webpack";
 import type { Options } from "./types";
 
-export default function typedCSS(content: string) {
+export default function typedCSS(
+	this: LoaderContext<Options>,
+	content: string,
+) {
 	const filename = `${this.resourcePath}.d.ts`;
-	const options: Options = this.getOptions(this);
+	const options: Options = getOptions(this);
 	const moduleExports = getCssModuleKeys(content);
 	let cssModuleDefinition = "";
 

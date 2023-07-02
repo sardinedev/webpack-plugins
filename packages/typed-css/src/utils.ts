@@ -101,16 +101,18 @@ export function buildTsExports(
 	filename: string,
 ): string {
 	let cssModuleDefinition = "";
-	const sanatizedModuleExports = moduleExports.filter((key) => {
-		if (filterReservedKeywords(key)) {
-			console.warn(
-				`Hey, Typed CSS here! Just to let you know I removed '${key}' from '${filename}' because it's a reserved Javascript keyword.`,
-			);
-			return;
-		} else {
-			return key;
-		}
-	});
+	const sanatizedModuleExports = moduleExports
+		.filter((key) => {
+			if (filterReservedKeywords(key)) {
+				console.warn(
+					`Hey, Typed CSS here! Just to let you know I removed '${key}' from '${filename}' because it's a reserved Javascript keyword.`,
+				);
+				return;
+			} else {
+				return key;
+			}
+		})
+		.sort();
 	cssModuleDefinition += buildNamedExports(sanatizedModuleExports);
 	cssModuleDefinition += "\n";
 	cssModuleDefinition += buildDefaultExport(sanatizedModuleExports);

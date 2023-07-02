@@ -1,6 +1,6 @@
 {
   "name": "webpack-plugins-typed-css",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A Webpack plugin to add type definitions to CSS",
   "main": "src/index.ts",
   "author": "Hugo Nogueira",
@@ -15,7 +15,8 @@
   "homepage": "https://github.com/sardinedev/webpack-plugings#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx swc --config-file ../../.swcrc ./src -d ./dist"
+    "build": "npx swc --config-file ../../.swcrc ./src -d ./dist",
+    "lint": "rome ci ./src"
   },
   "peerDependencies": {
     "css-loader": "^6.0.0",
@@ -24,5 +25,8 @@
   "dependencies": {
     "css-loader": "^6.0.0",
     "loader-utils": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/loader-utils": "^2.0.3"
   }
 }
