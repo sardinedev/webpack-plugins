@@ -45,11 +45,8 @@ jobs:
       #   with:
       #     coverageCommand: npm run test:coverage
 
-      - name: Check lint
-        run: npm run lint
-
-      - name: Build package
-        run: npm run build
+      - name: Release package
+        run: npm run release
 
       - name: Publish to npm
         id: changesets
