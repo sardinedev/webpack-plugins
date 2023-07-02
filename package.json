@@ -1,6 +1,5 @@
 {
-  "name": "webpack-plugings",
-  "version": "1.0.0",
+  "name": "webpack-plugins",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,12 +13,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sardinedev/webpack-plugings.git"
+    "url": "git+https://github.com/sardinedev/webpack-plugins.git"
   },
   "bugs": {
-    "url": "https://github.com/sardinedev/webpack-plugings/issues"
+    "url": "https://github.com/sardinedev/webpack-plugins/issues"
   },
-  "homepage": "https://github.com/sardinedev/webpack-plugings#readme",
+  "homepage": "https://github.com/sardinedev/webpack-plugins#readme",
   "workspaces": [
     "./packages/*"
   ],
