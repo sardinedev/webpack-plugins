@@ -1,5 +1,5 @@
 {
-  "name": "@sardine/webpack-plugins-typed-css",
+  "name": "@sardine/webpack-plugin-typed-css",
   "version": "0.0.0",
   "description": "A Webpack plugin to add type definitions to CSS",
   "main": "dist/index.js",
