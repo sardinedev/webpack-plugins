@@ -2,7 +2,7 @@
   "name": "@sardine/webpack-plugins-typed-css",
   "version": "0.0.0",
   "description": "A Webpack plugin to add type definitions to CSS",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "author": "Hugo Nogueira",
   "license": "MIT",
   "publishConfig": {
