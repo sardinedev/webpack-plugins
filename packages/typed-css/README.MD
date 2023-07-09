@@ -1,13 +1,13 @@
-# @sardine/webpack-plugins-typed-css
+# @sardine/webpack-plugin-typed-css
 
-The `@sardine/webpack-plugins-typed-css` creates a `.d.ts` file with css classes and ids to be imported by TypeScript.
+The `@sardine/webpack-plugin-typed-css` creates a `.d.ts` file with css classes and ids to be imported by TypeScript.
 
 ## Getting Started
 
-First, you'll need to install `@sardine/webpack-plugins-typed-css`:
+First, you'll need to install `@sardine/webpack-plugin-typed-css`:
 
 ```console
-npm install --save-dev @sardine/webpack-plugins-typed-css
+npm install --save-dev @sardine/webpack-plugin-typed-css
 ```
 
 And then configure your webpack config file:
@@ -23,9 +23,9 @@ module.exports = {
         use: [
           "style-loader",
           {
-            loader: "@sardine/webpack-plugins-typed-css",
+            loader: "@sardine/webpack-plugin-typed-css",
             options: {
-              banner: "Hey, @sardine/webpack-plugins-typed-css created this file for you!"
+              banner: "Hey, @sardine/webpack-plugin-typed-css created this file for you!"
             }
           },
           {
@@ -44,6 +44,8 @@ module.exports = {
 ## How does it work?
 
 This loader depends on `css-loader` and the `modules` option to be enabled.
+
+Webpack plugins are executed in the reverse order they are defined in the webpack config file. So, the `@sardine/webpack-plugin-typed-css` loader must be defined before the `css-loader`.
 
 ## Options
 
