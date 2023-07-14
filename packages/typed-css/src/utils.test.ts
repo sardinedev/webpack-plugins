@@ -6,6 +6,7 @@ import {
 	buildbanner,
 	getCssModuleKeys,
 	isReservedKeyword,
+	sanitiseKebabCase,
 } from "./utils";
 
 describe("Get CSS Module Keys", () => {
@@ -121,6 +122,13 @@ describe("Build default exports", () => {
 			"declare const styles: {\n\tclass: string;\n\tkey2: string;\n\tkey3: string;\n};\n\nexport default styles;\n";
 		expect(defaultExports).toBe(expectedDefaultExports);
 	});
+
+	it("should return a string with sanatised kebab names", () => {
+		const keys = ["class", "key2", "my-class"];
+		const defaultExports = buildDefaultExport(keys);
+		const expectedDefaultExports = `declare const styles: {\n\tclass: string;\n\tkey2: string;\n\t"my-class": string;\n};\n\nexport default styles;\n`;
+		expect(defaultExports).toBe(expectedDefaultExports);
+	});
 });
 
 describe("Build TypeScript exports", () => {
@@ -141,5 +149,21 @@ describe("Build TypeScript exports", () => {
 		const expected =
 			"export const a: string;\nexport const b: string;\nexport const c: string;\n\ndeclare const styles: {\n\ta: string;\n\tb: string;\n\tc: string;\n};\n\nexport default styles;\n";
 		expect(tsExports).toBe(expected);
+	});
+});
+
+describe("Sanitise kebab-case class names", () => {
+	it("should return a string wrapped in quotes", () => {
+		const kebabClass = "class-name";
+		const expected = `"class-name"`;
+		const sanitised = sanitiseKebabCase(kebabClass);
+		expect(sanitised).toBe(expected);
+	});
+
+	it("should return the original string", () => {
+		const kebabClass = "hello";
+		const expected = "hello";
+		const sanitised = sanitiseKebabCase(kebabClass);
+		expect(sanitised).toBe(expected);
 	});
 });
