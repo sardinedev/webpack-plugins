@@ -99,6 +99,14 @@ describe("Build named exports", () => {
 		const expectedNamedExports = `// Hey, Typed CSS here! Just to let you know I commented this type because it's a reserved Javascript keyword.\n// export const class: string;\nexport const key2: string;\nexport const key3: string;\n`;
 		expect(namedExports).toBe(expectedNamedExports);
 	});
+
+	it("should comment out kebab-case names and explain why", () => {
+		const keys = ["key1", "key2", "my-class"];
+		const namedExports = buildNamedExports(keys);
+		const expectedNamedExports =
+			"export const key1: string;\nexport const key2: string;\n// Hey, Typed CSS here! Just to let you know I commented this type because it contains a hyphen.\n// export const my-class: string;\n";
+		expect(namedExports).toBe(expectedNamedExports);
+	});
 });
 
 describe("Build default exports", () => {
