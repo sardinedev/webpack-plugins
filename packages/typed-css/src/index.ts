@@ -16,7 +16,7 @@ export default function typedCSS(
 		const banner = buildbanner(options);
 
 		cssModuleDefinition = banner;
-		cssModuleDefinition += buildTsExports(moduleExports, filename);
+		cssModuleDefinition += buildTsExports(moduleExports);
 
 		writeFileSync(filename, cssModuleDefinition, { encoding: "utf8" });
 	}
