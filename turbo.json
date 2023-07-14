@@ -10,9 +10,15 @@
       ]
     },
     "lint": {},
+    "test": {
+      "dependsOn": [
+        "^test"
+      ]
+    },
     "release": {
       "dependsOn": [
         "build",
+        "test",
         "lint"
       ]
     }
