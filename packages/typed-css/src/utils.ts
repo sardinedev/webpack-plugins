@@ -78,6 +78,17 @@ export function isReservedKeyword(selector: string): boolean {
 	return reservedWords.includes(selector);
 }
 
+/**
+ * Takes a string and wraps it in quotes if it contains a hyphen
+ * @param key - The key to sanitise
+ */
+export function sanitiseKebabCase(key: string): string {
+	if (key.includes("-")) {
+		return `"${key}"`;
+	}
+	return key;
+}
+
 export function buildNamedExports(keys: string[]): string {
 	let namedExports = "";
 	for (const key of keys) {
@@ -96,7 +107,7 @@ export function buildDefaultExport(keys: string[]): string {
 	}
 	let defaultExport = "declare const styles: {\n";
 	for (const key of keys) {
-		defaultExport += `\t${key}: string;\n`;
+		defaultExport += `\t${sanitiseKebabCase(key)}: string;\n`;
 	}
 	defaultExport += "};\n\n";
 	defaultExport += "export default styles;\n";
