@@ -2,8 +2,9 @@ import { writeFileSync } from "node:fs";
 import { buildTsExports, buildbanner, getCssModuleKeys } from "./utils";
 import type { LoaderContext } from "webpack";
 import type { Options } from "./types";
+import { formatWithPrettier } from "./formatters";
 
-export default function typedCSS(
+export default async function typedCSS(
 	this: LoaderContext<Options>,
 	content: string,
 ) {
@@ -18,7 +19,15 @@ export default function typedCSS(
 		cssModuleDefinition = banner;
 		cssModuleDefinition += buildTsExports(moduleExports);
 
-		writeFileSync(filename, cssModuleDefinition, { encoding: "utf8" });
+		let code: string | undefined;
+		if (options.formatter === "prettier") {
+			code = await formatWithPrettier(cssModuleDefinition);
+		}
+		if (!code) {
+			code = cssModuleDefinition;
+		}
+
+		writeFileSync(filename, code, { encoding: "utf8" });
 	}
 	return content;
 }

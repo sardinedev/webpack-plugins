@@ -27,9 +27,12 @@
   },
   "peerDependencies": {
     "css-loader": "^6.0.0",
+    "prettier": "^3.0.0",
     "webpack": "^5.0.0"
   },
-  "dependencies": {
-    "css-loader": "^6.0.0"
+  "peerDependenciesMeta": {
+    "prettier": {
+      "optional": true
+    }
   }
 }
