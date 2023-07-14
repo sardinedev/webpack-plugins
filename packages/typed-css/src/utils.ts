@@ -38,7 +38,7 @@ export function buildbanner(options?: Options): string {
 	return banner;
 }
 
-export function filterReservedKeywords(selector: string): boolean {
+export function isReservedKeyword(selector: string): boolean {
 	// Documented here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Reserved_keywords_as_of_ECMAScript_2015
 	const reservedWords = [
 		"break",
@@ -81,6 +81,10 @@ export function filterReservedKeywords(selector: string): boolean {
 export function buildNamedExports(keys: string[]): string {
 	let namedExports = "";
 	for (const key of keys) {
+		if (isReservedKeyword(key)) {
+			namedExports += `//Hey, Typed CSS here! Just to let you know I commented this type because it's a reserved Javascript keyword.
+			// export const ${key}: string;\n`;
+		}
 		namedExports += `export const ${key}: string;\n`;
 	}
 	return namedExports;
@@ -96,23 +100,9 @@ export function buildDefaultExport(keys: string[]): string {
 	return defaultExport;
 }
 
-export function buildTsExports(
-	moduleExports: string[],
-	filename: string,
-): string {
+export function buildTsExports(moduleExports: string[]): string {
 	let cssModuleDefinition = "";
-	const sanatizedModuleExports = moduleExports
-		.filter((key) => {
-			if (filterReservedKeywords(key)) {
-				console.warn(
-					`Hey, Typed CSS here! Just to let you know I removed '${key}' from '${filename}' because it's a reserved Javascript keyword.`,
-				);
-				return;
-			} else {
-				return key;
-			}
-		})
-		.sort();
+	const sanatizedModuleExports = moduleExports.sort();
 	cssModuleDefinition += buildNamedExports(sanatizedModuleExports);
 	cssModuleDefinition += "\n";
 	cssModuleDefinition += buildDefaultExport(sanatizedModuleExports);
