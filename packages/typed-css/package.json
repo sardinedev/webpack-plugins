@@ -20,8 +20,8 @@
     "dist"
   ],
   "scripts": {
-    "test": "vitest",
-    "coverage": "vitest --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest --coverage",
     "build": "npx swc --config-file ../../.swcrc ./src -d ./dist",
     "lint": "rome ci ./src"
   },

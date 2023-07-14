@@ -3,11 +3,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "turbo run test",
-    "lint": "turbo run lint",
     "build": "turbo run build",
+    "coverage": "vitest run --coverage",
+    "lint": "turbo run lint",
+    "prepare": "husky install",
     "release": "turbo run release",
-    "prepare": "husky install"
+    "test": "turbo run test"
   },
   "author": "Hugo Nogueira",
   "license": "MIT",
