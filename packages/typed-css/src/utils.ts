@@ -82,15 +82,18 @@ export function buildNamedExports(keys: string[]): string {
 	let namedExports = "";
 	for (const key of keys) {
 		if (isReservedKeyword(key)) {
-			namedExports += `//Hey, Typed CSS here! Just to let you know I commented this type because it's a reserved Javascript keyword.
-			// export const ${key}: string;\n`;
+			namedExports += `// Hey, Typed CSS here! Just to let you know I commented this type because it's a reserved Javascript keyword.\n// export const ${key}: string;\n`;
+		} else {
+			namedExports += `export const ${key}: string;\n`;
 		}
-		namedExports += `export const ${key}: string;\n`;
 	}
 	return namedExports;
 }
 
 export function buildDefaultExport(keys: string[]): string {
+	if (keys.length === 0) {
+		return "";
+	}
 	let defaultExport = "declare const styles: {\n";
 	for (const key of keys) {
 		defaultExport += `\t${key}: string;\n`;
@@ -102,6 +105,9 @@ export function buildDefaultExport(keys: string[]): string {
 
 export function buildTsExports(moduleExports: string[]): string {
 	let cssModuleDefinition = "";
+	if (moduleExports.length === 0) {
+		return cssModuleDefinition;
+	}
 	const sanatizedModuleExports = moduleExports.sort();
 	cssModuleDefinition += buildNamedExports(sanatizedModuleExports);
 	cssModuleDefinition += "\n";
