@@ -94,6 +94,8 @@ export function buildNamedExports(keys: string[]): string {
 	for (const key of keys) {
 		if (isReservedKeyword(key)) {
 			namedExports += `// Hey, Typed CSS here! Just to let you know I commented this type because it's a reserved Javascript keyword.\n// export const ${key}: string;\n`;
+		} else if (key.includes("-")) {
+			namedExports += `// Hey, Typed CSS here! Just to let you know I commented this type because it contains a hyphen.\n// export const ${key}: string;\n`;
 		} else {
 			namedExports += `export const ${key}: string;\n`;
 		}
