@@ -1,5 +1,11 @@
 # @sardine/webpack-plugin-typed-css
 
+## 1.0.1
+
+### Patch Changes
+
+- 2e8fed8: fix: remove CSS Loader dependency
+
 ## 1.0.0
 
 ### Major Changes
